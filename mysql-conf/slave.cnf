@@ -1,0 +1,83 @@
+[client]
+
+# CLIENT #
+port                           = 3306
+socket                         = /var/run/mysqld/mysqld.sock
+
+# UTF8 FOR CLIENT #
+default-character-set          = utf8mb4
+
+[mysqld]
+
+# GENERAL #
+user                           = mysql
+default_storage_engine         = InnoDB
+socket                         = /var/run/mysqld/mysqld.sock
+pid_file                       = /var/run/mysqld/mysqld.pid
+sql_mode                       =
+
+default-time-zone              = '+00:00'
+
+# UTF8 FOR SERVER #
+collation-server               = utf8mb4_general_ci
+init-connect                   = 'SET NAMES utf8mb4'
+character-set-server           = utf8mb4
+character-set-client-handshake = FALSE
+
+# MyISAM #
+key_buffer_size                = 32M
+myisam_recover_options         = FORCE,BACKUP
+
+# SAFETY #
+max_allowed_packet             = 16M
+max_connect_errors             = 1000000
+skip-name-resolve
+sysdate-is-now                 = 1
+innodb_strict_mode             = 1
+
+# DATA STORAGE #
+datadir                        = /var/lib/mysql/
+
+# BINARY LOGGING #
+log_bin                        = /var/lib/mysql/mysql-bin
+expire_logs_days               = 3
+sync_binlog                    = 1
+
+# CACHES AND LIMITS #
+tmp_table_size                 = 32M
+max_heap_table_size            = 32M
+query_cache_type               = 0
+query_cache_size               = 0
+max_connections                = 500
+thread_cache_size              = 50
+open-files-limit               = 65535
+table_definition_cache         = 1024
+table_open_cache               = 2048
+
+# INNODB #
+innodb_flush_method            = O_DIRECT
+innodb_log_files_in_group      = 2
+innodb_log_file_size           = 64M
+innodb_flush_log_at_trx_commit = 1
+innodb_file_per_table          = 1
+innodb_buffer_pool_size        = 160M
+
+# LOGGING #
+log-error                      = /var/log/mysql/mysql-error.log
+log-queries-not-using-indexes  = 0
+slow-query-log                 = 1
+slow_query_log_file            = /var/log/mysql/mysql-slow.log
+long_query_time                = 1
+
+# REPLICATION #
+log_slave_updates              = 1
+relay_log                      = /var/lib/mysql/relay-bin
+slave_net_timeout              = 60
+sync_master_info               = 1
+sync_relay_log                 = 1
+sync_relay_log_info            = 1
+enforce_gtid_consistency       = ON
+gtid_mode                      = ON
+server_id                      = 23306
+binlog-ignore-db               = mysql
+binlog-ignore-db               = informationschema

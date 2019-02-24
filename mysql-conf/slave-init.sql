@@ -1,0 +1,7 @@
+CHANGE MASTER TO
+  MASTER_HOST='master-db',
+  MASTER_USER='replication',
+  MASTER_PASSWORD='replicationpassword',
+  MASTER_PORT=3306,
+  MASTER_AUTO_POSITION=1;
+START SLAVE;
